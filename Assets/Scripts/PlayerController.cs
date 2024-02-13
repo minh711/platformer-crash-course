@@ -10,13 +10,13 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 8f;
     private float jumpImpulse = 10f;
     Vector2 moveInput;
-    TouchingDirections touchingDirection;
+    TouchingDirections touchingDirections;
 
     public float CurrentMoveSpeed
     {
         get
         {
-            if (IsMoving)
+            if (IsMoving && !touchingDirections.IsOnWall)
             {
                 if (IsRunning)
                 {
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        touchingDirection = GetComponent<TouchingDirections>();
+        touchingDirections = GetComponent<TouchingDirections>();
     }
 
     private void FixedUpdate()
@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO Check if alive as well
-        if (context.started && touchingDirection.IsGrounded)
+        if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpImpulse);
