@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsFacingRight { 
         get 
-        { 
+        {
             return _isFacingRight; 
         }
         private set 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void FixedUpdate()
